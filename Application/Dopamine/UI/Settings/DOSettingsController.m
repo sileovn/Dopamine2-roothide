@@ -274,7 +274,23 @@
                 PSSpecifier *actionsGroupSpecifier = [PSSpecifier emptyGroupSpecifier];
                 actionsGroupSpecifier.name = DOLocalizedString(@"Section_Actions");
                 [specifiers addObject:actionsGroupSpecifier];
-                
+                 if (envManager.isJailbroken) {
+                    PSSpecifier *mountSpecifier = [PSSpecifier emptyGroupSpecifier];
+                    mountSpecifier.target = self;
+                    [mountSpecifier setProperty:@"Input_Mmount_Title" forKey:@"title"];
+                    [mountSpecifier setProperty:@"DOButtonCell" forKey:@"headerCellClass"];
+                    [mountSpecifier setProperty:@"doc" forKey:@"image"];
+                    [mountSpecifier setProperty:@"mountPressed" forKey:@"action"];
+                    [specifiers addObject:mountSpecifier];
+
+                    PSSpecifier *unmountSpecifier = [PSSpecifier emptyGroupSpecifier];
+                    unmountSpecifier.target = self;
+                    [unmountSpecifier setProperty:@"Input_Unmount_Title" forKey:@"title"];
+                    [unmountSpecifier setProperty:@"DOButtonCell" forKey:@"headerCellClass"];
+                    [unmountSpecifier setProperty:@"trash" forKey:@"image"];
+                    [unmountSpecifier setProperty:@"unmountPressed" forKey:@"action"];
+                    [specifiers addObject:unmountSpecifier];
+                } 
                 if (envManager.isJailbroken) {
                     PSSpecifier *refreshAppsSpecifier = [PSSpecifier emptyGroupSpecifier];
                     refreshAppsSpecifier.target = self;
